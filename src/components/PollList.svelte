@@ -7,7 +7,7 @@
 <div class="poll-list">
     {#each polls as poll (poll.id)}
         <div>
-            <PollDetails {poll} />
+            <PollDetails {poll} on:vote />
         </div>
     {/each}
 </div>
@@ -18,5 +18,5 @@
         grid-template-columns: 1fr 1fr;
         grid-gap: 20px;
     }
-    
+
 </style>

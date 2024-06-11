@@ -31,6 +31,20 @@ import Footer from "./components/Footer.svelte";
 	activeItem='Current Polls';
   }
 
+  const handleVote = (e) => {
+	const {id, option} = e.detail;
+	let copiedPolls = [...polls];
+	let upvotedPoll = copiedPolls.find((poll) => poll.id == id);
+
+	if(option ==='a'){
+		upvotedPoll.votesA++;
+	}
+	if(option ==='b'){
+		upvotedPoll.votesB++;
+	}
+	polls=copiedPolls;
+  }
+
 
 </script>
 
@@ -40,7 +54,7 @@ import Footer from "./components/Footer.svelte";
 	<Tabs {items} {activeItem} on:tabChange = {tabChange} />
 
 	{#if activeItem === 'Current Polls'}
-		<PollList {polls} />
+		<PollList {polls} on:vote={handleVote} />
 	{:else if activeItem === 'Add New Poll'}
 		<CreatePollFrom on:add={handleAdd} />
 	{/if}
